@@ -35,13 +35,13 @@ var client,
     resourceSpace = new openapp.oo.Resource(openapp.param.space()),
     feedbackTimeout,
     loadedModel = null;
-    
+
 var init = function() {
   var iwcCallback = function(intent) {
     console.log(intent);
   };
-  client = new Las2peerWidgetLibrary("http://localhost:8080/CAE/models", iwcCallback);
-  
+  client = new Las2peerWidgetLibrary("http://gaudi.informatik.rwth-aachen.de:8082/CAE/models", iwcCallback);
+
    // retrieve current model from the space and store it
   getData("my:ns:model").then(function(modelUris){
     if(modelUris.length > 0){
@@ -129,7 +129,7 @@ var storeModel = function() {
             function(error) {
               console.log(error);
               feedback(error);
-            });            
+            });
           }
         });
       } else {
@@ -188,7 +188,7 @@ var getData = function(type){
       deferred = $.Deferred();
 
   openapp.resource.get(spaceUri,(function(deferred){
-    
+
     return function(space){
       var resourceUri, resourceObj, values;
       for(resourceUri in space.data){
@@ -237,7 +237,7 @@ var generateRandomId = function(){
 
 // generates an attribute according to the SyncMeta specification
 var generateAttribute = function(name, value){
-  var attribute = 
+  var attribute =
   {
     "name": name,
     "id": "modelAttributes[" + name + "]",
